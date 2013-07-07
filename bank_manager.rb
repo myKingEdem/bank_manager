@@ -9,6 +9,8 @@ puts ""
 ricardo = Account.new('Ricardo', 'RV001A', '10000001')
 bank.open_an_account(ricardo)
 
+puts "Ricardo Accound: #{ricardo}#"
+
 
 # Transactions
 bank.deposit(100.00)

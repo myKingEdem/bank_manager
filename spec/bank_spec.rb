@@ -3,17 +3,18 @@ require_relative '../lib/account'
 
 describe Bank, '#initialize' do
   before do
-    @name = 'Bank of RubyVillage'
-    @assets = 1000.00
-    @bank = Bank.new(@name, @assets)
+    name = 'Bank of RubyVillage'
+    assets = 1000.0
+
+    @bank = Bank.new(name, assets)
   end
 
   it "has a name" do
     expect(@bank.name).to eql('Bank of RubyVillage')
   end
 
-  it "has an initial_asset" do
-    expect(@bank.assets).to eql(1000.00)
+  it "has initial assets" do
+    expect(@bank.assets).to eql(1000.0)
   end
 
   it "has no accounts" do
@@ -21,9 +22,9 @@ describe Bank, '#initialize' do
   end
 
   it "does not have a liability" do
-    expect(@bank.liability).to eql(0.00)
+    expect(@bank.liability).to eql(0.0)
   end
-end
+end 
 
 describe Bank, '#open_an_account' do
   it "creates an additional account" do
@@ -39,17 +40,17 @@ end
 describe Bank, '#deposit' do
   it "increases the bank's liability" do
     bank = Bank.new('BoRV')
-    bank.deposit(100.00)
+    bank.deposit(100.0)
 
-    expect(bank.liability).to eql(100.00)
+    expect(bank.liability).to eql(100.0)
   end
 end
 
 describe Bank, '#withdraw' do
   it "descreases the bank's liability" do
     bank = Bank.new('BoRV')
-    bank.withdraw(50.00)
+    bank.withdraw(50.0)
 
-    expect(bank.liability).to eql(-50.00)
+    expect(bank.liability).to eql(-50.0)
   end
 end
