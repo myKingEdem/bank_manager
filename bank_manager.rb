@@ -5,12 +5,12 @@ bank = Bank.new('Bank of RubyVillage')
 puts "#{ bank.name }"
 
 puts ""
+
 #Accounts
 ricardo = Account.new('Ricardo', 'RV001A', '10000001')
 bank.open_an_account(ricardo)
 
-puts "Ricardo Accound: #{ricardo}#"
-
+puts "Ricardo's Account: #{ricardo.name}# Hut Number: #{ricardo.hut_number}"
 
 # Transactions
 bank.deposit(100.00)

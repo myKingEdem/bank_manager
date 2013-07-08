@@ -2,11 +2,11 @@ require_relative '../lib/account'
 
 describe Account, '#initialize' do
   before do
-    @name = 'Mozzie'
-    @hut_number = 'RV001A'
-    @account_number = 'AN0001'
+    name = 'Mozzie'
+    hut_number = 'RV001A'
+    account_number = 'AN0001'
 
-    @account = Account.new(@name, @hut_number, @account_number)
+    @account = Account.new(name, hut_number, account_number)
   end
 
     it "has the owner's name" do
