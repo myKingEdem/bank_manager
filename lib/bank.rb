@@ -12,11 +12,11 @@ class Bank
     @accounts << account
   end
 
-  def deposit(ammount)
-    @liability += ammount
+  def deposit(amount)
+    @liability += amount
   end
 
-  def withdraw(ammount)
-    @liability -= ammount
+  def withdraw(amount)
+    @liability -= amount
   end
 end
