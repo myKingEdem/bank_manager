@@ -7,7 +7,7 @@ puts "#{ bank.name }"
 puts ""
 
 #Accounts
-ricardo = Account.new('Ricardo', 'RV001A', '10000001')
+keynes = Account.new('Keynes', 'RV001A', 'AN0001')
 bank.open_an_account(ricardo)
 
 puts "Ricardo's Account: #{ricardo.name}# Hut Number: #{ricardo.hut_number}"
