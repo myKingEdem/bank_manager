@@ -8,9 +8,9 @@ puts ""
 
 #Accounts
 keynes = Account.new('Keynes', 'RV001A', 'AN0001')
-bank.open_an_account(ricardo)
+bank.open_an_account(keynes)
 
-puts "Ricardo's Account: #{ricardo.name}# Hut Number: #{ricardo.hut_number}"
+puts "Keynes's Account: #{ricardo.name}# Hut Number: #{keynes.hut_number}"
 
 # Transactions
 bank.deposit(100.00)
