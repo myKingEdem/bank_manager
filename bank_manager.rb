@@ -7,17 +7,16 @@ puts "#{ bank.name }"
 puts ""
 
 #Accounts
-keynes = Account.new('Keynes', 'RV001A', 'AN0001')
+keynes = Account.new('Keynes', 'RV001A')
 bank.open_an_account(keynes)
+smith = Account.new('Smith', 'RV001B')
+bank.open_an_account(smith)
 
-puts "Keynes's Account: #{ricardo.name}# Hut Number: #{keynes.hut_number}"
-
-# Transactions
-bank.deposit(100.00)
-bank.withdraw(25.00)
-bank.deposit(10.00)
+bank.deposit(smith.account_number, 200.0)
+bank.withdraw(keynes.account_number, 100.0)
 
 #Checks
+puts bank.accounts
 puts bank.liability
 puts bank.assets 
 puts bank.accounts.count

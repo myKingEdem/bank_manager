@@ -29,7 +29,7 @@ end
 describe Bank, '#open_an_account' do
   it "creates an additional account" do
     bank = Bank.new('BoRV')
-    account = Account.new('Peter', 'RB001B', 'AN0001')
+    account = Account.new('Peter', 'RV001A')
 
     bank.open_an_account(account)
 
@@ -38,19 +38,63 @@ describe Bank, '#open_an_account' do
 end
 
 describe Bank, '#deposit' do
-  it "increases the bank's liability" do
-    bank = Bank.new('BoRV')
-    bank.deposit(100.0)
+  before do
+    @bank = Bank.new('BoRV')
+    account = Account.new('Peter', 'RV001A')
+    @account_number = account.object_id.to_s
+    
+    @bank.open_an_account(account)
+    @bank.deposit(@account_number, 100.0)
+  end
 
-    expect(bank.liability).to eql(100.0)
+  it "increases the bank's liability" do
+    expect(@bank.liability).to eql(100.0)
+  end
+
+  it "credits the account holder" do
+   creditable_account = @bank.accounts.detect { |acc| acc[:account_number] == @account_number }
+
+   expect(creditable_account[:balance]).to eql(100.0)
   end
 end
 
 describe Bank, '#withdraw' do
-  it "descreases the bank's liability" do
-    bank = Bank.new('BoRV')
-    bank.withdraw(50.0)
+  before do
+    @bank = Bank.new('BoRV')
+    account = Account.new('Peter','RV001A')
+    @account_number = account.object_id.to_s
 
-    expect(bank.liability).to eql(-50.0)
+    @bank.open_an_account(account)
+    @bank.deposit(@account_number, 100.0)
   end
-end
+
+  context "with sufficient balance" do
+    it "debits the account holder" do
+      @bank.withdraw(@account_number, 50.0)
+      debitable_account = @bank.accounts.detect { |acc| acc[:account_number] == @account_number }
+
+      expect(debitable_account[:balance]).to eql(50.0)
+    end
+
+    it "descreases the bank's liability" do
+      @bank.withdraw(@account_number, 50.0)
+      
+      expect(@bank.liability).to eql(50.0)
+    end
+  end
+
+  context "without sufficient balance" do
+    it "doesn't decrease the bank's liability" do
+      @bank.withdraw(@account_number, 200.0)
+
+      expect(@bank.liability).to eql(100.0)
+    end
+
+    it "doesn't debit the account holder" do
+      @bank.withdraw(@account_number, 200.0)
+      debitable_account = @bank.accounts.detect { |acc| acc[:account_number] == @account_number }
+
+      expect(debitable_account[:balance]).to eql(100.0)
+    end
+  end
+ end

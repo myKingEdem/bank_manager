@@ -4,9 +4,8 @@ describe Account, '#initialize' do
   before do
     name = 'Mozzie'
     hut_number = 'RV001A'
-    account_number = 'AN0001'
 
-    @account = Account.new(name, hut_number, account_number)
+    @account = Account.new(name, hut_number)
   end
 
     it "has the owner's name" do
@@ -18,6 +17,10 @@ describe Account, '#initialize' do
     end
 
     it "has an account number" do
-      expect(@account.account_number).to eql('AN0001')
+      expect(@account.account_number).to eql(@account.object_id.to_s)
+    end
+
+    it "has 0 balance" do
+      expect(@account.balance).to eql(0.0)
     end
   end
