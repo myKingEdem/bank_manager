@@ -14,19 +14,23 @@ class Bank
   end
 
   def deposit(account, amount)
-    find_account = @accounts.detect { |acc| acc[:account] == account }
-    creditable_account = find_account.values.first
+    creditable_account = find_account(account)
     creditable_account.balance += amount
     @liability += amount
   end
 
   def withdraw(account, amount)
-    find_account = @accounts.detect { |acc| acc[:account] == account }
-    debitable_account = find_account.values.first
-
+    debitable_account = find_account(account)
     unless debitable_account.balance < amount
       debitable_account.balance -= amount
       @liability -=amount
     end
+  end
+
+  private
+
+  def find_account(account)
+    this_account = @accounts.detect { |acc| acc[:account] == account }
+    this_account.values.first
   end
 end
