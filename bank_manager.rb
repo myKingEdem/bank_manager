@@ -12,8 +12,11 @@ bank.open_an_account(keynes)
 smith = Account.new('Smith', 'RV001B')
 bank.open_an_account(smith)
 
-bank.deposit(smith.account_number, 200.0)
-bank.withdraw(keynes.account_number, 100.0)
+bank.deposit(smith, 200.0)
+bank.deposit(keynes, 100.0)
+
+bank.withdraw(smith, 50.0)
+bank.withdraw(keynes, 30.0)
 
 #Checks
 puts bank.accounts

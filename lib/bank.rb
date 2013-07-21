@@ -9,22 +9,23 @@ class Bank
   end
 
   def open_an_account(account)
-    branch_account = { name: account.name, address: account.hut_number, 
-                    balance: account.balance, account_number: account.account_number }
+    branch_account = { account: account }
     @accounts << branch_account
   end
 
-  def deposit(account_number, amount)
-    creditable_account = @accounts.detect { |acc| acc[:account_number] == account_number }
-    creditable_account[:balance] += amount
-
+  def deposit(account, amount)
+    find_account = @accounts.detect { |acc| acc[:account] == account }
+    creditable_account = find_account.values.first
+    creditable_account.balance += amount
     @liability += amount
   end
 
-  def withdraw(account_number, amount)
-    debitable_account = @accounts.detect { |acc| acc[:account_number] == account_number }
-    unless debitable_account[:balance] <= amount
-      debitable_account[:balance] -= amount
+  def withdraw(account, amount)
+    find_account = @accounts.detect { |acc| acc[:account] == account }
+    debitable_account = find_account.values.first
+
+    unless debitable_account.balance < amount
+      debitable_account.balance -= amount
       @liability -=amount
     end
   end

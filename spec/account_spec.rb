@@ -23,4 +23,9 @@ describe Account, '#initialize' do
     it "has 0 balance" do
       expect(@account.balance).to eql(0.0)
     end
+
+    it "has a unique account_number" do #redundant
+      account_2 = Account.new('Smith', 'RV001B')
+      expect(account_2.account_number).to_not eql(@account.account_number)
+    end
   end

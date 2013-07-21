@@ -1,10 +1,11 @@
 class Account
-  attr_reader :name, :hut_number, :account_number, :balance
+  attr_reader :name, :hut_number, :account_number
+  attr_accessor :balance
 
   def initialize(name, hut_number)
     @name = name
     @hut_number = hut_number
-    @account_number = self.object_id.to_s
+    @account_number = object_id.to_s #implicit call to self
     @balance = 0.0
   end
 end

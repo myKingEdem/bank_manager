@@ -30,9 +30,7 @@ describe Bank, '#open_an_account' do
   it "creates an additional account" do
     bank = Bank.new('BoRV')
     account = Account.new('Peter', 'RV001A')
-
     bank.open_an_account(account)
-
     expect(bank.accounts.count).to eql(1)
   end
 end
@@ -40,11 +38,9 @@ end
 describe Bank, '#deposit' do
   before do
     @bank = Bank.new('BoRV')
-    account = Account.new('Peter', 'RV001A')
-    @account_number = account.object_id.to_s
-    
-    @bank.open_an_account(account)
-    @bank.deposit(@account_number, 100.0)
+    @account = Account.new('Peter', 'RV001A') 
+    @bank.open_an_account(@account)
+    @bank.deposit(@account, 100.0)
   end
 
   it "increases the bank's liability" do
@@ -52,49 +48,39 @@ describe Bank, '#deposit' do
   end
 
   it "credits the account holder" do
-   creditable_account = @bank.accounts.detect { |acc| acc[:account_number] == @account_number }
-
-   expect(creditable_account[:balance]).to eql(100.0)
+   expect(@account.balance).to eql(100.0)
   end
 end
 
 describe Bank, '#withdraw' do
   before do
     @bank = Bank.new('BoRV')
-    account = Account.new('Peter','RV001A')
-    @account_number = account.object_id.to_s
-
-    @bank.open_an_account(account)
-    @bank.deposit(@account_number, 100.0)
+    @account = Account.new('Peter','RV001A')
+    @bank.open_an_account(@account)
+    @bank.deposit(@account, 100.0)
   end
 
-  context "with sufficient balance" do
+  context "with sufficient fund" do
     it "debits the account holder" do
-      @bank.withdraw(@account_number, 50.0)
-      debitable_account = @bank.accounts.detect { |acc| acc[:account_number] == @account_number }
-
-      expect(debitable_account[:balance]).to eql(50.0)
+      @bank.withdraw(@account, 50.0)
+      expect(@account.balance).to eql(50.0)
     end
 
     it "descreases the bank's liability" do
-      @bank.withdraw(@account_number, 50.0)
-      
+      @bank.withdraw(@account, 50.0)
       expect(@bank.liability).to eql(50.0)
     end
   end
 
-  context "without sufficient balance" do
+  context "without sufficient funds" do
     it "doesn't decrease the bank's liability" do
-      @bank.withdraw(@account_number, 200.0)
-
+      @bank.withdraw(@account, 200.0)
       expect(@bank.liability).to eql(100.0)
     end
 
     it "doesn't debit the account holder" do
-      @bank.withdraw(@account_number, 200.0)
-      debitable_account = @bank.accounts.detect { |acc| acc[:account_number] == @account_number }
-
-      expect(debitable_account[:balance]).to eql(100.0)
+      @bank.withdraw(@account, 200.0)
+      expect(@account.balance).to eql(100.0)
     end
   end
- end
+end
