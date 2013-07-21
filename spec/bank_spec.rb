@@ -60,7 +60,7 @@ describe Bank, '#withdraw' do
     @bank.deposit(@account, 100.0)
   end
 
-  context "with sufficient fund" do
+  context "with sufficient funds" do
     it "debits the account holder" do
       @bank.withdraw(@account, 50.0)
       expect(@account.balance).to eql(50.0)
