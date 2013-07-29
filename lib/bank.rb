@@ -9,8 +9,7 @@ class Bank
   end
 
   def open_an_account(account)
-    branch_account = { account: account }
-    @accounts << branch_account
+    @accounts << { account: account }
   end
 
   def deposit(account, amount)
@@ -30,7 +29,7 @@ class Bank
   private
 
   def find_account(account)
-    this_account = @accounts.detect { |acc| acc[:account] == account }
+    this_account = @accounts.detect { |hash| hash[:account] == account }
     this_account.values.first
   end
 end

@@ -5,7 +5,7 @@ class Account
   def initialize(name, hut_number)
     @name = name
     @hut_number = hut_number
-    @account_number = object_id.to_s #implicit call to self
+    @account_number = object_id.to_s
     @balance = 0.0
   end
 end
