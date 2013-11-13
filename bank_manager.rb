@@ -7,9 +7,9 @@ puts "#{ bank.name }"
 puts ""
 
 #Accounts
-keynes = Account.new('Keynes', 'RV001A')
+keynes = Account.new('Keynes', 'RV001A','2011')
 bank.open_an_account(keynes)
-smith = Account.new('Smith', 'RV001B')
+smith = Account.new('Smith', 'RV001B', '2012')
 bank.open_an_account(smith)
 
 bank.deposit(smith, 200.0)

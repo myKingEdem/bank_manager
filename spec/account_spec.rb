@@ -3,17 +3,22 @@ require_relative '../lib/account'
 describe Account, '#initialize' do
   before do
     name = 'Mozzie'
-    hut_number = 'RV001A'
+    address = 'RV001A'
+    pin = '4343'
 
-    @account = Account.new(name, hut_number)
+    @account = Account.new(name, address, pin)
   end
 
-    it "has the owner's name" do
-      expect(@account.name).to eql('Mozzie')
+    it "has the holder's name" do
+      expect(@account.holder_name).to eql('Mozzie')
     end
 
-    it "has the owner's hut_number" do
-      expect(@account.hut_number).to eql('RV001A')
+    it "has the owner's address" do
+      expect(@account.address).to eql('RV001A')
+    end
+
+    it "has pin number" do
+      expect(@account.pin).to eql('4343')
     end
 
     it "has an account number" do
@@ -26,7 +31,7 @@ describe Account, '#initialize' do
 
   context "creating another accounts" do
     it "has a unique account_number" do
-      account_2 = Account.new('Smith', 'RV001B')
+      account_2 = Account.new('Smith', 'RV001B', '3454')
       expect(account_2.account_number).to_not eql(@account.account_number)
     end
   end
